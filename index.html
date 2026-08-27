@@ -824,7 +824,7 @@ footer { background: var(--ink); color: #B9B3AA; padding: 56px 0 28px; border-to
           </div>
         </div>
         <div class="hero-right-col">
-          <a href="https://wa.me/56991454048" class="hero-main-cta">AGENDA UNA CLASE DE PRUEBA AQUÍ →</a>
+          <a href="https://wa.me/56945289477" class="hero-main-cta">AGENDA UNA CLASE DE PRUEBA AQUÍ →</a>
         </div>
       </div>
     </div>
@@ -980,7 +980,7 @@ footer { background: var(--ink); color: #B9B3AA; padding: 56px 0 28px; border-to
           <p class="where-loc"><span class="pin">📍</span> Estadio Mayor, Peñalolén — Santiago</p>
           <div class="where-note">Ven a una clase de prueba gratis. Solo trae zapatillas, ropa cómoda y ganas de entrenar. Si es triatlón: gorra, lentes, short y toalla.</div>
           <div style="margin-top:28px;">
-            <a href="https://wa.me/56991454048" class="btn btn-primary">INSCRÍBETE AHORA</a>
+            <a href="https://wa.me/56945289477" class="btn btn-primary">INSCRÍBETE AHORA</a>
           </div>
         </div>
         <div class="sched-grid reveal">
@@ -1194,24 +1194,24 @@ footer { background: var(--ink); color: #B9B3AA; padding: 56px 0 28px; border-to
           <div class="form-row">
             <div class="field">
               <label>NOMBRE</label>
-              <input type="text" placeholder="Tu nombre">
+              <input type="text" id="f-nombre" placeholder="Tu nombre">
             </div>
             <div class="field">
               <label>APELLIDO</label>
-              <input type="text" placeholder="Tu apellido">
+              <input type="text" id="f-apellido" placeholder="Tu apellido">
             </div>
           </div>
           <div class="field">
             <label>EMAIL</label>
-            <input type="email" placeholder="tu@email.com">
+            <input type="email" id="f-email" placeholder="tu@email.com">
           </div>
           <div class="field">
             <label>WHATSAPP</label>
-            <input type="tel" placeholder="+56 9 xxxx xxxx">
+            <input type="tel" id="f-tel" placeholder="+56 9 xxxx xxxx">
           </div>
           <div class="field">
             <label>¿QUÉ TE INTERESA?</label>
-            <select>
+            <select id="f-plan">
               <option value="" disabled selected>Selecciona un plan</option>
               <option>Running Online</option>
               <option>Triatlón Online</option>
@@ -1224,10 +1224,10 @@ footer { background: var(--ink); color: #B9B3AA; padding: 56px 0 28px; border-to
           </div>
           <div class="field">
             <label>MENSAJE (OPCIONAL)</label>
-            <textarea placeholder="Cuéntanos sobre tu experiencia o tus objetivos..."></textarea>
+            <textarea id="f-mensaje" placeholder="Cuéntanos sobre tu experiencia o tus objetivos..."></textarea>
           </div>
           <div class="form-submit">
-            <a href="https://wa.me/56991454048" class="btn btn-primary" style="width:100%;justify-content:center;">ENVIAR POR WHATSAPP →</a>
+            <button type="button" onclick="enviarWA()" class="btn btn-primary" style="width:100%;justify-content:center;">ENVIAR POR WHATSAPP →</button>
           </div>
         </div>
         <div class="form-info">
@@ -1291,7 +1291,7 @@ footer { background: var(--ink); color: #B9B3AA; padding: 56px 0 28px; border-to
         </div>
         <div class="foot-nav-group">
           <h4>CONTACTO</h4>
-          <a href="https://wa.me/56991454048">WhatsApp</a>
+          <a href="https://wa.me/56945289477">WhatsApp</a>
           <a href="mailto:jf.deportes@gmail.com">Email</a>
           <a href="#inscripcion">Inscribirse</a>
         </div>
@@ -1328,6 +1328,30 @@ document.querySelectorAll('.disc-tab').forEach(tab => {
     document.getElementById(tab.dataset.disc).classList.add('active');
   });
 });
+</script>
+
+<script>
+function enviarWA() {
+  var nombre  = document.getElementById('f-nombre').value.trim();
+  var apellido = document.getElementById('f-apellido').value.trim();
+  var email   = document.getElementById('f-email').value.trim();
+  var tel     = document.getElementById('f-tel').value.trim();
+  var plan    = document.getElementById('f-plan').value.trim();
+  var mensaje = document.getElementById('f-mensaje').value.trim();
+
+  if (!nombre) { alert('Por favor ingresá tu nombre.'); return; }
+  if (!tel)    { alert('Por favor ingresá tu WhatsApp.'); return; }
+
+  var texto = '¡Hola! Me interesa JFtri 🏃\n\n'
+    + '👤 Nombre: ' + nombre + ' ' + apellido + '\n'
+    + '📧 Email: '  + (email || 'No indicado') + '\n'
+    + '📱 Tel: '    + tel + '\n'
+    + '📋 Plan: '   + (plan || 'No seleccionado') + '\n'
+    + '💬 Mensaje: '+ (mensaje || 'Sin mensaje');
+
+  var url = 'https://wa.me/56945289477?text=' + encodeURIComponent(texto);
+  window.open(url, '_blank');
+}
 </script>
 </body>
 </html>
