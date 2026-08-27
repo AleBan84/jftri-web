@@ -24,20 +24,23 @@ body { font-family: 'Work Sans', sans-serif; background: var(--paper); color: va
 
 .wrap { max-width: 1180px; margin: 0 auto; padding: 0 28px; }
 
-/* NAV */
-header { position: sticky; top: 0; z-index: 100; background: #050A0D; }
+/* ===== HEADER ===== */
+header {
+  position: sticky; top: 0; z-index: 100;
+  background: #050A0D;
+  border-bottom: none;
+}
 .nav { display: flex; align-items: center; justify-content: space-between; padding: 10px 28px; max-width: 1180px; margin: 0 auto; }
 .nav-logo { display: flex; align-items: center; gap: 10px; }
-.nav-logo-mark { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--teal), var(--magenta)); display: flex; align-items: center; justify-content: center; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; color: #fff; font-size: 1rem; }
-.nav-logo span { font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; color: #fff; font-size: 1.35rem; letter-spacing: .03em; }
 .nav-links { display: flex; align-items: center; gap: 32px; margin-left: 24px; }
 .nav-links a { color: #fff; font-size: .82rem; font-weight: 500; transition: color .2s; text-transform: uppercase; letter-spacing: .08em; }
 .nav-links a:hover { color: var(--teal); }
-.nav-cta { background: var(--magenta); color: #fff; padding: 9px 20px; border-radius: 6px; font-weight: 600; font-size: .88rem; white-space: nowrap; transition: transform .2s, box-shadow .2s; }
-.nav-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(238,62,168,.35); }
 .nav-toggle { display: none; background: none; border: 0; color: #fff; font-size: 1.6rem; cursor: pointer; }
 @media(max-width:860px){
-  .nav-links { position: fixed; top: 66px; left: 0; right: 0; background: var(--ink); flex-direction: column; align-items: flex-start; padding: 20px 28px 28px; gap: 18px; display: none; }
+  .nav-links { position: fixed; top: 66px; left: 0; right: 0; background: var(--ink); flex-direction: column; align-items: flex-start; padding: 20px 28px 28px; gap: 18px; border-bottom: none; display: none; }
+  .nav-links.open { display: flex; }
+  .nav-toggle { display: block; }
+}
   .nav-links.open { display: flex; }
   .nav-toggle { display: block; }
 }
@@ -166,17 +169,19 @@ footer { background: var(--ink); color: #B9B3AA; padding: 56px 0 28px; border-to
 <header>
   <nav class="nav">
     <a href="index.html" class="nav-logo">
-      <div class="nav-logo-mark">JF</div>
-      <span>JFTRI</span>
+      <img src="iconos/logo.png" alt="JFtri" style="height:60px;width:auto;">
     </a>
-    <div class="nav-links" id="navLinks">
-      <a href="index.html">Inicio</a>
-      <a href="running.html" style="color:var(--teal)">Running</a>
-      <a href="triatlon.html">Triatlón</a>
-      <a href="index.html#inscripcion">Contacto</a>
-    </div>
-    <a href="https://wa.me/56945289477" class="nav-cta">AGENDA UNA CLASE →</a>
     <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html#planes" style="color:#00B8C4;">EMPECEMOS</a>
+      <a href="index.html#club">METODOLOGÍA</a>
+      <a href="index.html#equipo">COACHES</a>
+      <a href="index.html#entrenamos">HORARIOS</a>
+      <a href="index.html#galeria">EL CLUB</a>
+      <a href="index.html#resultados">RESULTADOS</a>
+      <a href="index.html#blog">BLOG</a>
+      <a href="index.html#inscripcion">CONTACTO</a>
+    </div>
   </nav>
 </header>
 
@@ -341,7 +346,9 @@ footer { background: var(--ink); color: #B9B3AA; padding: 56px 0 28px; border-to
   <div class="wrap">
     <div class="foot-inner">
       <div class="foot-brand">
-        <img src="iconos/logo.png" alt="JFtri" style="height:60px;width:auto;">
+        <div class="foot-logo">
+          <img src="iconos/logo.png" alt="JFtri" style="height:60px;width:auto;">
+        </div>
         <div class="foot-tagline">ACTITUD + CONSTANCIA = ÉXITO</div>
       </div>
       <div class="foot-nav">
@@ -349,16 +356,19 @@ footer { background: var(--ink); color: #B9B3AA; padding: 56px 0 28px; border-to
           <h4>CLUB</h4>
           <a href="index.html#club">EL CLUB</a>
           <a href="index.html#equipo">EQUIPO</a>
+          <a href="index.html#resultados">RESULTADOS</a>
         </div>
         <div class="foot-nav-group">
-          <h4>METODOLOGÍA</h4>
-          <a href="running.html">Running</a>
-          <a href="triatlon.html">Triatlón</a>
+          <h4>ENTRENAMIENTO</h4>
+          <a href="index.html#entrenamos">HORARIOS</a>
+          <a href="index.html#galeria">GALERÍA</a>
+          <a href="index.html#blog">BLOG</a>
         </div>
         <div class="foot-nav-group">
           <h4>CONTACTO</h4>
           <a href="https://wa.me/56945289477">WhatsApp</a>
           <a href="mailto:jf.deportes@gmail.com">Email</a>
+          <a href="index.html#inscripcion">Inscribirse</a>
         </div>
       </div>
     </div>
