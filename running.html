@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Metodología Running — JFtri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=IBM+Plex+Mono:wght@400;600&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1C1815;
+  --ink-soft: #3E3934;
+  --teal: #2BD2C5;
+  --teal-deep: #0E4E48;
+  --magenta: #E51675;
+  --paper: #FAF8F5;
+  --paper-dim: #F0ECE6;
+  --line: rgba(28,24,21,0.12);
+  --line-light: rgba(255,255,255,0.14);
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; text-decoration: none !important; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Work Sans', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 28px; }
+
+/* NAV */
+header { position: sticky; top: 0; z-index: 100; background: #050A0D; }
+.nav { display: flex; align-items: center; justify-content: space-between; padding: 10px 28px; max-width: 1180px; margin: 0 auto; }
+.nav-logo { display: flex; align-items: center; gap: 10px; }
+.nav-logo-mark { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--teal), var(--magenta)); display: flex; align-items: center; justify-content: center; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; color: #fff; font-size: 1rem; }
+.nav-logo span { font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; color: #fff; font-size: 1.35rem; letter-spacing: .03em; }
+.nav-links { display: flex; align-items: center; gap: 32px; margin-left: 24px; }
+.nav-links a { color: #fff; font-size: .82rem; font-weight: 500; transition: color .2s; text-transform: uppercase; letter-spacing: .08em; }
+.nav-links a:hover { color: var(--teal); }
+.nav-cta { background: var(--magenta); color: #fff; padding: 9px 20px; border-radius: 6px; font-weight: 600; font-size: .88rem; white-space: nowrap; transition: transform .2s, box-shadow .2s; }
+.nav-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(238,62,168,.35); }
+.nav-toggle { display: none; background: none; border: 0; color: #fff; font-size: 1.6rem; cursor: pointer; }
+@media(max-width:860px){
+  .nav-links { position: fixed; top: 66px; left: 0; right: 0; background: var(--ink); flex-direction: column; align-items: flex-start; padding: 20px 28px 28px; gap: 18px; display: none; }
+  .nav-links.open { display: flex; }
+  .nav-toggle { display: block; }
+}
+
+/* HERO */
+.page-hero {
+  background: linear-gradient(135deg, #07100F 0%, #0E1F1D 60%, #1a0a10 100%);
+  padding: 80px 0 60px;
+  border-bottom: 1px solid var(--line-light);
+}
+.page-hero .kicker { font-family: 'IBM Plex Mono', monospace; font-size: .78rem; letter-spacing: .12em; color: var(--magenta); margin-bottom: 14px; display: block; }
+.page-hero h1 { font-family: 'Big Shoulders Display', sans-serif; text-transform: uppercase; font-weight: 900; font-size: clamp(3rem, 8vw, 6rem); line-height: 1; color: #fff; margin-bottom: 20px; }
+.page-hero p { color: rgba(255,255,255,.75); font-size: 1.1rem; max-width: 620px; line-height: 1.65; }
+.hero-accent { color: var(--teal); }
+
+/* SECCIONES */
+.section { padding: 72px 0; }
+.section-alt { background: var(--paper-dim); }
+.kicker { font-family: 'IBM Plex Mono', monospace; font-size: .78rem; letter-spacing: .12em; color: var(--magenta); margin-bottom: 14px; display: block; }
+h2 { font-family: 'Big Shoulders Display', sans-serif; text-transform: uppercase; font-weight: 800; font-size: clamp(2rem,4vw,2.9rem); line-height: 1; margin-bottom: 20px; }
+h3 { font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: 1.4rem; text-transform: uppercase; margin-bottom: 10px; }
+
+/* PASOS */
+.steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin-top: 48px; }
+.step-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px 24px;
+  border: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+}
+.step-card::before {
+  content: attr(data-num);
+  font-family: 'Big Shoulders Display', sans-serif;
+  font-size: 5rem;
+  font-weight: 900;
+  color: var(--teal);
+  opacity: .12;
+  position: absolute;
+  top: -8px; right: 12px;
+  line-height: 1;
+}
+.step-card .step-num { font-family: 'IBM Plex Mono', monospace; font-size: .7rem; letter-spacing: .1em; color: var(--teal); margin-bottom: 10px; display: block; }
+.step-card h3 { font-size: 1.1rem; margin-bottom: 8px; }
+.step-card p { font-size: .9rem; color: var(--ink-soft); line-height: 1.55; }
+
+/* FOCO */
+.foco-box {
+  background: linear-gradient(135deg, var(--teal-deep), #0a1a18);
+  border-radius: 20px;
+  padding: 48px;
+  color: #fff;
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+@media(max-width:700px){ .foco-box { grid-template-columns: 1fr; padding: 32px 24px; } }
+.foco-box h2 { color: #fff; }
+.foco-box p { color: rgba(255,255,255,.8); font-size: 1rem; line-height: 1.65; }
+.foco-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+.foco-list li { display: flex; align-items: flex-start; gap: 12px; font-size: .95rem; color: rgba(255,255,255,.85); }
+.foco-list li::before { content: '→'; color: var(--teal); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+
+/* TABLA */
+.table-wrap { overflow-x: auto; margin-top: 40px; }
+table { width: 100%; border-collapse: collapse; font-size: .92rem; }
+thead { background: var(--ink); color: #fff; }
+thead th { padding: 14px 20px; text-align: left; font-family: 'IBM Plex Mono', monospace; font-size: .75rem; letter-spacing: .08em; }
+tbody tr:nth-child(even) { background: #fff; }
+tbody tr:nth-child(odd) { background: var(--paper-dim); }
+tbody td { padding: 14px 20px; border-bottom: 1px solid var(--line); }
+tbody td:first-child { font-weight: 600; }
+.tag-teal { background: rgba(43,210,197,.15); color: var(--teal-deep); padding: 3px 10px; border-radius: 20px; font-size: .8rem; font-weight: 600; }
+
+/* LOGICA */
+.logica-card {
+  background: #fff;
+  border-left: 4px solid var(--magenta);
+  border-radius: 0 12px 12px 0;
+  padding: 28px 32px;
+  margin-top: 32px;
+  font-size: .97rem;
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+
+/* ADAPTACION */
+.adaptacion-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 32px; }
+@media(max-width:640px){ .adaptacion-grid { grid-template-columns: 1fr; } }
+.ada-card { background: #fff; border-radius: 12px; padding: 24px; border: 1px solid var(--line); }
+.ada-card .ada-icon { font-size: 1.5rem; margin-bottom: 10px; }
+.ada-card h3 { font-size: 1rem; margin-bottom: 6px; }
+.ada-card p { font-size: .88rem; color: var(--ink-soft); line-height: 1.55; }
+
+/* CTA */
+.cta-section {
+  background: linear-gradient(135deg, #1a0a10, #0E4E48);
+  padding: 72px 0;
+  text-align: center;
+}
+.cta-section h2 { color: #fff; margin-bottom: 16px; }
+.cta-section p { color: rgba(255,255,255,.75); margin-bottom: 36px; font-size: 1.05rem; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 16px 32px; border-radius: 6px; font-weight: 700; font-size: 1rem; transition: transform .2s, box-shadow .2s; cursor: pointer; border: none; }
+.btn-primary { background: var(--magenta); color: #fff; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(229,22,117,.35); }
+.btn-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,.4); margin-left: 12px; }
+.btn-outline:hover { background: rgba(255,255,255,.1); }
+
+/* FOOTER */
+footer { background: var(--ink); color: #B9B3AA; padding: 56px 0 28px; border-top: 1px solid var(--line-light); }
+.foot-inner { display: flex; justify-content: space-between; gap: 40px; flex-wrap: wrap; margin-bottom: 40px; }
+.foot-tagline { font-family: 'IBM Plex Mono', monospace; font-size: .72rem; letter-spacing: .1em; color: rgba(255,255,255,.35); margin-top: 10px; }
+.foot-nav { display: flex; gap: 48px; flex-wrap: wrap; }
+.foot-nav-group { display: flex; flex-direction: column; gap: 10px; }
+.foot-nav-group h4 { font-family: 'IBM Plex Mono', monospace; font-size: .7rem; letter-spacing: .1em; color: rgba(255,255,255,.4); margin-bottom: 4px; }
+.foot-nav-group a { font-size: .85rem; color: #B9B3AA; transition: color .2s; }
+.foot-nav-group a:hover { color: var(--teal); }
+.foot-bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding-top: 24px; border-top: 1px solid var(--line-light); font-size: .8rem; color: rgba(255,255,255,.3); font-family: 'IBM Plex Mono', monospace; }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-mark">JF</div>
+      <span>JFTRI</span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Inicio</a>
+      <a href="running.html" style="color:var(--teal)">Running</a>
+      <a href="triatlon.html">Triatlón</a>
+      <a href="index.html#inscripcion">Contacto</a>
+    </div>
+    <a href="https://wa.me/56945289477" class="nav-cta">AGENDA UNA CLASE →</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">☰</button>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="wrap">
+    <span class="kicker">CARRERA A PIE</span>
+    <h1>METODOLOGÍA<br><span class="hero-accent">RUNNING</span></h1>
+    <p>No aplicamos planes genéricos. Cada corredor pasa por el mismo proceso de base: entender primero dónde está parado, para luego decidir hacia dónde lo llevamos.</p>
+  </div>
+</section>
+
+<!-- PROCESO 5 PASOS -->
+<section class="section">
+  <div class="wrap">
+    <span class="kicker">NUESTRO PROCESO</span>
+    <h2>El proceso en 5 pasos</h2>
+    <p style="color:var(--ink-soft);max-width:600px;">Mejoramos lo más relevante primero. Evaluamos, identificamos las falencias que más limitan al corredor y trabajamos sobre eso de forma prioritaria.</p>
+
+    <div class="steps-grid">
+      <div class="step-card" data-num="1">
+        <span class="step-num">PASO 01</span>
+        <h3>Anamnesis y objetivos</h3>
+        <p>Levantamos historial deportivo, salud, disponibilidad de tiempo y definimos el objetivo real: completar una distancia, mejorar un tiempo o construir un hábito sólido.</p>
+      </div>
+      <div class="step-card" data-num="2">
+        <span class="step-num">PASO 02</span>
+        <h3>Evaluación técnica</h3>
+        <p>Analizamos técnica de carrera y biomecánica — pisada y zancada — más indicadores de rendimiento como ritmos, frecuencia cardíaca y capacidad aeróbica.</p>
+      </div>
+      <div class="step-card" data-num="3">
+        <span class="step-num">PASO 03</span>
+        <h3>Foco prioritario</h3>
+        <p>Con los resultados en mano, conversamos con el corredor qué vale más la pena trabajar primero. No intentamos mejorar todo a la vez.</p>
+      </div>
+      <div class="step-card" data-num="4">
+        <span class="step-num">PASO 04</span>
+        <h3>Planificación</h3>
+        <p>Diseñamos el plan específico para ese foco y ese corredor. Para quienes recién comienzan, incluye primero una fase de adaptación progresiva.</p>
+      </div>
+      <div class="step-card" data-num="5">
+        <span class="step-num">PASO 05</span>
+        <h3>Seguimiento y reevaluación</h3>
+        <p>El plan se ajusta según la respuesta real del corredor. Evaluaciones de control periódicas para medir avances, corregir el rumbo y definir el siguiente objetivo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOCO -->
+<section class="section section-alt">
+  <div class="wrap">
+    <div class="foco-box">
+      <div>
+        <span class="kicker" style="color:var(--teal)">NUESTRA FILOSOFÍA</span>
+        <h2 style="color:#fff;">Un foco a la vez</h2>
+        <p>Priorizamos la falencia que más está limitando el progreso del corredor y acordamos juntos ese foco. Así lo acercamos a sus objetivos de forma progresiva y responsable, sin saltarnos etapas.</p>
+      </div>
+      <ul class="foco-list">
+        <li>Evaluación antes de cualquier planificación</li>
+        <li>Foco definido en conjunto con el corredor</li>
+        <li>Plan específico para ese foco</li>
+        <li>Reevaluación al cumplir cada objetivo</li>
+        <li>Nuevo foco según la siguiente falencia detectada</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ADAPTACION PRINCIPIANTES -->
+<section class="section">
+  <div class="wrap">
+    <span class="kicker">PARA QUIENES COMIENZAN</span>
+    <h2>Adaptación progresiva</h2>
+    <p style="color:var(--ink-soft);max-width:640px;">Para quienes recién comienzan a correr, no partimos por una distancia objetivo — partimos por construir la base que permite entrenar de forma sostenida y sin lesiones.</p>
+
+    <div class="adaptacion-grid">
+      <div class="ada-card">
+        <div class="ada-icon">🗣️</div>
+        <h3>Anamnesis</h3>
+        <p>Historial de actividad física, lesiones previas, tiempo disponible y motivación real detrás del objetivo.</p>
+      </div>
+      <div class="ada-card">
+        <div class="ada-icon">🔍</div>
+        <h3>Evaluación inicial</h3>
+        <p>Análisis de pisada y zancada, capacidad aeróbica actual y tolerancia articular a la carga de impacto.</p>
+      </div>
+      <div class="ada-card">
+        <div class="ada-icon">📋</div>
+        <h3>Plan de adaptación</h3>
+        <p>Progresión gradual combinando caminata y trote, aumentando el tiempo continuo corriendo antes de pensar en distancia o ritmo.</p>
+      </div>
+      <div class="ada-card">
+        <div class="ada-icon">📊</div>
+        <h3>Seguimiento semanal</h3>
+        <p>Ajustes semana a semana según cómo responde el cuerpo — dolor, fatiga, sueño — no según lo que "debería" poder hacer.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TABLA TIEMPOS -->
+<section class="section section-alt">
+  <div class="wrap">
+    <span class="kicker">REFERENCIA</span>
+    <h2>Tiempos de progresión</h2>
+    <p style="color:var(--ink-soft);max-width:640px;">Rangos orientativos para un adulto sano entrenando 3 veces por semana. Cada corredor avanza a su propio ritmo — esto es un marco de referencia, no una promesa.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>DISTANCIA OBJETIVO</th>
+            <th>DESDE CERO</th>
+            <th>CON BASE DE 5K</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>5 km continuo</td>
+            <td><span class="tag-teal">6 – 8 semanas</span></td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>10 km</td>
+            <td><span class="tag-teal">12 – 16 semanas</span></td>
+            <td>6 – 8 semanas</td>
+          </tr>
+          <tr>
+            <td>21 km (media maratón)</td>
+            <td><span class="tag-teal">20 – 24 semanas</span></td>
+            <td>12 – 16 semanas</td>
+          </tr>
+          <tr>
+            <td>42 km (maratón)</td>
+            <td>No recomendado</td>
+            <td>16 – 20 semanas*</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:.82rem;color:var(--ink-soft);margin-top:12px;">* Requiere base de 10K corrido de forma cómoda antes de empezar el plan específico.</p>
+
+    <div class="logica-card">
+      <strong>¿Por qué estos tiempos?</strong> El cuerpo necesita tiempo para adaptar tendones, ligamentos y estructura ósea al impacto repetido de correr — un proceso más lento que la adaptación cardiovascular. Por eso la progresión de volumen es gradual (evitamos subir más de ~10% de carga semanal) y priorizamos la consistencia por sobre la velocidad de avance.
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="wrap">
+    <span class="kicker" style="color:var(--teal);justify-content:center;display:flex;">¿LISTO PARA EMPEZAR?</span>
+    <h2>Agenda tu clase de prueba</h2>
+    <p>Sin compromiso. Ven a conocernos y evaluamos juntos por dónde empezar.</p>
+    <a href="https://wa.me/56945289477" class="btn btn-primary">AGENDAR POR WHATSAPP →</a>
+    <a href="index.html" class="btn btn-outline">VER EL CLUB</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-inner">
+      <div class="foot-brand">
+        <img src="iconos/logo.png" alt="JFtri" style="height:60px;width:auto;">
+        <div class="foot-tagline">ACTITUD + CONSTANCIA = ÉXITO</div>
+      </div>
+      <div class="foot-nav">
+        <div class="foot-nav-group">
+          <h4>CLUB</h4>
+          <a href="index.html#club">EL CLUB</a>
+          <a href="index.html#equipo">EQUIPO</a>
+        </div>
+        <div class="foot-nav-group">
+          <h4>METODOLOGÍA</h4>
+          <a href="running.html">Running</a>
+          <a href="triatlon.html">Triatlón</a>
+        </div>
+        <div class="foot-nav-group">
+          <h4>CONTACTO</h4>
+          <a href="https://wa.me/56945289477">WhatsApp</a>
+          <a href="mailto:jf.deportes@gmail.com">Email</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Club JFtri · Santiago, Chile</span>
+      <span>Estadio Mayor, Peñalolén</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('navToggle').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+</script>
+</body>
+</html>

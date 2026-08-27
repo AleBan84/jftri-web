@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Metodología Triatlón — JFtri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=IBM+Plex+Mono:wght@400;600&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1C1815;
+  --ink-soft: #3E3934;
+  --teal: #2BD2C5;
+  --teal-deep: #0E4E48;
+  --magenta: #E51675;
+  --paper: #FAF8F5;
+  --paper-dim: #F0ECE6;
+  --line: rgba(28,24,21,0.12);
+  --line-light: rgba(255,255,255,0.14);
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; text-decoration: none !important; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Work Sans', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 28px; }
+
+/* NAV */
+header { position: sticky; top: 0; z-index: 100; background: #050A0D; }
+.nav { display: flex; align-items: center; justify-content: space-between; padding: 10px 28px; max-width: 1180px; margin: 0 auto; }
+.nav-logo { display: flex; align-items: center; gap: 10px; }
+.nav-logo-mark { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--teal), var(--magenta)); display: flex; align-items: center; justify-content: center; font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; color: #fff; font-size: 1rem; }
+.nav-logo span { font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; color: #fff; font-size: 1.35rem; letter-spacing: .03em; }
+.nav-links { display: flex; align-items: center; gap: 32px; margin-left: 24px; }
+.nav-links a { color: #fff; font-size: .82rem; font-weight: 500; transition: color .2s; text-transform: uppercase; letter-spacing: .08em; }
+.nav-links a:hover { color: var(--teal); }
+.nav-cta { background: var(--magenta); color: #fff; padding: 9px 20px; border-radius: 6px; font-weight: 600; font-size: .88rem; white-space: nowrap; transition: transform .2s, box-shadow .2s; }
+.nav-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(238,62,168,.35); }
+.nav-toggle { display: none; background: none; border: 0; color: #fff; font-size: 1.6rem; cursor: pointer; }
+@media(max-width:860px){
+  .nav-links { position: fixed; top: 66px; left: 0; right: 0; background: var(--ink); flex-direction: column; align-items: flex-start; padding: 20px 28px 28px; gap: 18px; display: none; }
+  .nav-links.open { display: flex; }
+  .nav-toggle { display: block; }
+}
+
+/* HERO */
+.page-hero {
+  background: linear-gradient(135deg, #050A0D 0%, #07100F 50%, #0d0a1a 100%);
+  padding: 80px 0 60px;
+  border-bottom: 1px solid var(--line-light);
+}
+.page-hero .kicker { font-family: 'IBM Plex Mono', monospace; font-size: .78rem; letter-spacing: .12em; color: var(--magenta); margin-bottom: 14px; display: block; }
+.page-hero h1 { font-family: 'Big Shoulders Display', sans-serif; text-transform: uppercase; font-weight: 900; font-size: clamp(3rem, 8vw, 6rem); line-height: 1; color: #fff; margin-bottom: 20px; }
+.page-hero p { color: rgba(255,255,255,.75); font-size: 1.1rem; max-width: 620px; line-height: 1.65; }
+.hero-accent { color: var(--teal); }
+
+/* DISCIPLINAS BANNER */
+.disc-banner { display: flex; gap: 0; border-bottom: 1px solid var(--line-light); background: #07100F; }
+.disc-item { flex: 1; padding: 20px 28px; display: flex; align-items: center; gap: 14px; border-right: 1px solid var(--line-light); }
+.disc-item:last-child { border-right: none; }
+.disc-item img { height: 36px; width: auto; }
+.disc-item span { font-family: 'IBM Plex Mono', monospace; font-size: .72rem; letter-spacing: .1em; color: var(--teal); text-transform: uppercase; }
+@media(max-width:640px){ .disc-banner { flex-direction: column; } .disc-item { border-right: none; border-bottom: 1px solid var(--line-light); } }
+
+/* SECCIONES */
+.section { padding: 72px 0; }
+.section-alt { background: var(--paper-dim); }
+.kicker { font-family: 'IBM Plex Mono', monospace; font-size: .78rem; letter-spacing: .12em; color: var(--magenta); margin-bottom: 14px; display: block; }
+h2 { font-family: 'Big Shoulders Display', sans-serif; text-transform: uppercase; font-weight: 800; font-size: clamp(2rem,4vw,2.9rem); line-height: 1; margin-bottom: 20px; }
+h3 { font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: 1.4rem; text-transform: uppercase; margin-bottom: 10px; }
+
+/* PASOS */
+.steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin-top: 48px; }
+.step-card { background: #fff; border-radius: 16px; padding: 32px 24px; border: 1px solid var(--line); position: relative; overflow: hidden; }
+.step-card::before { content: attr(data-num); font-family: 'Big Shoulders Display', sans-serif; font-size: 5rem; font-weight: 900; color: var(--teal); opacity: .12; position: absolute; top: -8px; right: 12px; line-height: 1; }
+.step-card .step-num { font-family: 'IBM Plex Mono', monospace; font-size: .7rem; letter-spacing: .1em; color: var(--teal); margin-bottom: 10px; display: block; }
+.step-card h3 { font-size: 1.1rem; margin-bottom: 8px; }
+.step-card p { font-size: .9rem; color: var(--ink-soft); line-height: 1.55; }
+
+/* EVALUACION DISCIPLINAS */
+.eval-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; margin-top: 40px; }
+.eval-card { background: #fff; border-radius: 16px; padding: 28px 24px; border: 1px solid var(--line); }
+.eval-card .eval-icon { height: 48px; width: auto; margin-bottom: 16px; }
+.eval-card h3 { font-size: 1.1rem; margin-bottom: 10px; color: var(--ink); }
+.eval-card ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.eval-card ul li { font-size: .88rem; color: var(--ink-soft); display: flex; gap: 8px; }
+.eval-card ul li::before { content: '·'; color: var(--teal); font-weight: 900; flex-shrink: 0; }
+
+/* FOCO */
+.foco-box { background: linear-gradient(135deg, #0d0a1a, #07100F); border-radius: 20px; padding: 48px; color: #fff; margin-top: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+@media(max-width:700px){ .foco-box { grid-template-columns: 1fr; padding: 32px 24px; } }
+.foco-box h2 { color: #fff; }
+.foco-box p { color: rgba(255,255,255,.8); font-size: 1rem; line-height: 1.65; }
+.foco-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+.foco-list li { display: flex; align-items: flex-start; gap: 12px; font-size: .95rem; color: rgba(255,255,255,.85); }
+.foco-list li::before { content: '→'; color: var(--teal); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+
+/* TABLA */
+.table-wrap { overflow-x: auto; margin-top: 40px; }
+table { width: 100%; border-collapse: collapse; font-size: .92rem; }
+thead { background: var(--ink); color: #fff; }
+thead th { padding: 14px 20px; text-align: left; font-family: 'IBM Plex Mono', monospace; font-size: .75rem; letter-spacing: .08em; }
+tbody tr:nth-child(even) { background: #fff; }
+tbody tr:nth-child(odd) { background: var(--paper-dim); }
+tbody td { padding: 14px 20px; border-bottom: 1px solid var(--line); }
+tbody td:first-child { font-weight: 600; }
+.tag-teal { background: rgba(43,210,197,.15); color: var(--teal-deep); padding: 3px 10px; border-radius: 20px; font-size: .8rem; font-weight: 600; }
+.tag-warn { background: rgba(229,22,117,.1); color: var(--magenta); padding: 3px 10px; border-radius: 20px; font-size: .8rem; font-weight: 600; }
+
+/* LOGICA */
+.logica-card { background: #fff; border-left: 4px solid var(--magenta); border-radius: 0 12px 12px 0; padding: 28px 32px; margin-top: 32px; font-size: .97rem; color: var(--ink-soft); line-height: 1.7; }
+
+/* CTA */
+.cta-section { background: linear-gradient(135deg, #0d0a1a, #0E4E48); padding: 72px 0; text-align: center; }
+.cta-section h2 { color: #fff; margin-bottom: 16px; }
+.cta-section p { color: rgba(255,255,255,.75); margin-bottom: 36px; font-size: 1.05rem; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 16px 32px; border-radius: 6px; font-weight: 700; font-size: 1rem; transition: transform .2s, box-shadow .2s; cursor: pointer; border: none; }
+.btn-primary { background: var(--magenta); color: #fff; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(229,22,117,.35); }
+.btn-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,.4); margin-left: 12px; }
+.btn-outline:hover { background: rgba(255,255,255,.1); }
+
+/* FOOTER */
+footer { background: var(--ink); color: #B9B3AA; padding: 56px 0 28px; border-top: 1px solid var(--line-light); }
+.foot-inner { display: flex; justify-content: space-between; gap: 40px; flex-wrap: wrap; margin-bottom: 40px; }
+.foot-tagline { font-family: 'IBM Plex Mono', monospace; font-size: .72rem; letter-spacing: .1em; color: rgba(255,255,255,.35); margin-top: 10px; }
+.foot-nav { display: flex; gap: 48px; flex-wrap: wrap; }
+.foot-nav-group { display: flex; flex-direction: column; gap: 10px; }
+.foot-nav-group h4 { font-family: 'IBM Plex Mono', monospace; font-size: .7rem; letter-spacing: .1em; color: rgba(255,255,255,.4); margin-bottom: 4px; }
+.foot-nav-group a { font-size: .85rem; color: #B9B3AA; transition: color .2s; }
+.foot-nav-group a:hover { color: var(--teal); }
+.foot-bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding-top: 24px; border-top: 1px solid var(--line-light); font-size: .8rem; color: rgba(255,255,255,.3); font-family: 'IBM Plex Mono', monospace; }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-mark">JF</div>
+      <span>JFTRI</span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Inicio</a>
+      <a href="running.html">Running</a>
+      <a href="triatlon.html" style="color:var(--teal)">Triatlón</a>
+      <a href="index.html#inscripcion">Contacto</a>
+    </div>
+    <a href="https://wa.me/56945289477" class="nav-cta">AGENDA UNA CLASE →</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">☰</button>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="wrap">
+    <span class="kicker">NATACIÓN · CICLISMO · CARRERA</span>
+    <h1>METODOLOGÍA<br><span class="hero-accent">TRIATLÓN</span></h1>
+    <p>En triatlón el resultado final lo determina la disciplina más débil, no el promedio de las tres. Identificamos esa falencia y trabajamos sobre ella de forma prioritaria, sin descuidar las otras dos.</p>
+  </div>
+</section>
+
+<!-- BANNER DISCIPLINAS -->
+<div class="disc-banner">
+  <div class="disc-item">
+    <img src="iconos/icono_swim.png" alt="Natación">
+    <span>Natación</span>
+  </div>
+  <div class="disc-item">
+    <img src="iconos/icono_bike.png" alt="Ciclismo">
+    <span>Ciclismo</span>
+  </div>
+  <div class="disc-item">
+    <img src="iconos/icono_run.png" alt="Carrera">
+    <span>Carrera a pie</span>
+  </div>
+</div>
+
+<!-- PROCESO 5 PASOS -->
+<section class="section">
+  <div class="wrap">
+    <span class="kicker">NUESTRO PROCESO</span>
+    <h2>El proceso en 5 pasos</h2>
+    <p style="color:var(--ink-soft);max-width:620px;">El mismo proceso de base para cada triatleta: entender dónde está parado en cada una de las tres disciplinas antes de decidir hacia dónde lo llevamos.</p>
+
+    <div class="steps-grid">
+      <div class="step-card" data-num="1">
+        <span class="step-num">PASO 01</span>
+        <h3>Anamnesis y objetivos</h3>
+        <p>Levantamos el historial en las tres disciplinas, experiencia previa en triatlón, salud, disponibilidad de tiempo y definimos el objetivo real.</p>
+      </div>
+      <div class="step-card" data-num="2">
+        <span class="step-num">PASO 02</span>
+        <h3>Evaluación técnica</h3>
+        <p>Evaluamos las tres disciplinas por separado: técnica de nado, posición en bicicleta y pisada en running. El resultado final lo determina la disciplina más débil.</p>
+      </div>
+      <div class="step-card" data-num="3">
+        <span class="step-num">PASO 03</span>
+        <h3>Foco prioritario</h3>
+        <p>Conversamos con el deportista cuál disciplina está limitando más su rendimiento global. Frecuentemente es la natación en atletas que vienen del running o el ciclismo.</p>
+      </div>
+      <div class="step-card" data-num="4">
+        <span class="step-num">PASO 04</span>
+        <h3>Planificación integrada</h3>
+        <p>Plan que combina las tres disciplinas distribuyendo la carga según el foco, cuidando la recuperación e incorporando sesiones de bricks cuando corresponde.</p>
+      </div>
+      <div class="step-card" data-num="5">
+        <span class="step-num">PASO 05</span>
+        <h3>Seguimiento y reevaluación</h3>
+        <p>Evaluaciones de control periódicas en las tres disciplinas para medir avances y redefinir el foco si es necesario.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVALUACION POR DISCIPLINA -->
+<section class="section section-alt">
+  <div class="wrap">
+    <span class="kicker">EVALUACIÓN INICIAL</span>
+    <h2>Qué miramos en cada disciplina</h2>
+    <p style="color:var(--ink-soft);max-width:620px;">Las falencias y los tiempos de adaptación son distintos en cada una. Por eso evaluamos las tres por separado.</p>
+
+    <div class="eval-grid">
+      <div class="eval-card">
+        <img class="eval-icon" src="iconos/icono_swim.png" alt="Natación">
+        <h3>Natación</h3>
+        <ul>
+          <li>Técnica de nado y sensación de agua</li>
+          <li>Capacidad de sostener ritmo en la distancia objetivo</li>
+          <li>Suele ser la disciplina que más tiempo de adaptación requiere</li>
+        </ul>
+      </div>
+      <div class="eval-card">
+        <img class="eval-icon" src="iconos/icono_bike.png" alt="Ciclismo">
+        <h3>Ciclismo</h3>
+        <ul>
+          <li>Posición en la bicicleta</li>
+          <li>Cadencia y eficiencia de pedaleo</li>
+          <li>Capacidad de sostener potencia en el terreno de competencia</li>
+        </ul>
+      </div>
+      <div class="eval-card">
+        <img class="eval-icon" src="iconos/icono_run.png" alt="Running">
+        <h3>Running</h3>
+        <ul>
+          <li>Pisada y zancada</li>
+          <li>Capacidad de correr con piernas ya cargadas por el nado y la bici</li>
+          <li>La especificidad más importante del triatlón</li>
+        </ul>
+      </div>
+      <div class="eval-card">
+        <div class="eval-icon" style="font-size:2rem;margin-bottom:16px;">⚡</div>
+        <h3>Transiciones y Bricks</h3>
+        <ul>
+          <li>Se incorporan progresivamente, no desde el primer día</li>
+          <li>Primero se construye base en cada disciplina por separado</li>
+          <li>Foco en la gestión conjunta de la carga combinada</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOCO -->
+<section class="section">
+  <div class="wrap">
+    <div class="foco-box">
+      <div>
+        <span class="kicker" style="color:var(--teal)">NUESTRA FILOSOFÍA</span>
+        <h2 style="color:#fff;">El eslabón más débil</h2>
+        <p>En triatlón no alcanza con ser bueno en dos disciplinas. Identificamos cuál de las tres está limitando el rendimiento global y trabajamos sobre ella de forma prioritaria, sin descuidar las otras dos.</p>
+      </div>
+      <ul class="foco-list">
+        <li>Evaluación separada de las tres disciplinas</li>
+        <li>Foco en la disciplina que más limita el resultado</li>
+        <li>Plan integrado con las tres disciplinas</li>
+        <li>Bricks incorporados progresivamente</li>
+        <li>Reevaluación periódica y ajuste del foco</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- TABLA TIEMPOS -->
+<section class="section section-alt">
+  <div class="wrap">
+    <span class="kicker">REFERENCIA</span>
+    <h2>Tiempos de preparación</h2>
+    <p style="color:var(--ink-soft);max-width:640px;">Rangos orientativos para un adulto sano entrenando de forma consistente. Varían según si el deportista ya practica las tres disciplinas o parte desde cero.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>DISTANCIA</th>
+            <th>CON BASE EN LAS 3</th>
+            <th>DESDE CERO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Sprint (750m – 20km – 5km)</td>
+            <td><span class="tag-teal">8 – 12 semanas</span></td>
+            <td>16 – 20 semanas</td>
+          </tr>
+          <tr>
+            <td>Olímpico (1,5km – 40km – 10km)</td>
+            <td><span class="tag-teal">12 – 16 semanas*</span></td>
+            <td>20 – 24 semanas*</td>
+          </tr>
+          <tr>
+            <td>Half (1,9km – 90km – 21km)</td>
+            <td><span class="tag-teal">16 – 20 semanas*</span></td>
+            <td><span class="tag-warn">No recomendado sin base</span></td>
+          </tr>
+          <tr>
+            <td>Full (3,8km – 180km – 42km)</td>
+            <td><span class="tag-teal">20 – 30 semanas*</span></td>
+            <td><span class="tag-warn">No recomendado sin base</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:.82rem;color:var(--ink-soft);margin-top:12px;">* Requiere haber completado de forma cómoda la distancia anterior antes de empezar el plan específico.</p>
+
+    <div class="logica-card">
+      <strong>¿Por qué estos tiempos?</strong> El triatlón no es la suma de tres deportes, sino la gestión conjunta de su carga combinada. Por eso la progresión hacia distancias mayores es más lenta que en un deporte único — se necesita una base sólida en cada disciplina antes de sumar volumen e intensidad en las tres a la vez.
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="wrap">
+    <span class="kicker" style="color:var(--teal);justify-content:center;display:flex;">¿LISTO PARA EMPEZAR?</span>
+    <h2>Agenda tu clase de prueba</h2>
+    <p>Sin compromiso. Ven a conocernos y evaluamos juntos por dónde empezar.</p>
+    <a href="https://wa.me/56945289477" class="btn btn-primary">AGENDAR POR WHATSAPP →</a>
+    <a href="index.html" class="btn btn-outline">VER EL CLUB</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-inner">
+      <div class="foot-brand">
+        <img src="iconos/logo.png" alt="JFtri" style="height:60px;width:auto;">
+        <div class="foot-tagline">ACTITUD + CONSTANCIA = ÉXITO</div>
+      </div>
+      <div class="foot-nav">
+        <div class="foot-nav-group">
+          <h4>CLUB</h4>
+          <a href="index.html#club">EL CLUB</a>
+          <a href="index.html#equipo">EQUIPO</a>
+        </div>
+        <div class="foot-nav-group">
+          <h4>METODOLOGÍA</h4>
+          <a href="running.html">Running</a>
+          <a href="triatlon.html">Triatlón</a>
+        </div>
+        <div class="foot-nav-group">
+          <h4>CONTACTO</h4>
+          <a href="https://wa.me/56945289477">WhatsApp</a>
+          <a href="mailto:jf.deportes@gmail.com">Email</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Club JFtri · Santiago, Chile</span>
+      <span>Estadio Mayor, Peñalolén</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('navToggle').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+</script>
+</body>
+</html>
