@@ -63,6 +63,21 @@ header {
 
 /* SECCIONES */
 .section { padding: 72px 0; }
+.section-hero-bg {
+  position: relative;
+  padding: 72px 0;
+  background: url('imagenes/hero_tri.png') center/cover no-repeat;
+}
+.section-hero-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(7, 16, 15, 0.82);
+}
+.section-hero-bg .wrap { position: relative; z-index: 1; }
+.section-hero-bg .kicker { color: var(--magenta); }
+.section-hero-bg h2 { color: #fff; }
+.section-hero-bg > .wrap > p { color: rgba(255,255,255,.75); }
 .section-alt { background: var(--paper-dim); }
 .kicker { font-family: 'IBM Plex Mono', monospace; font-size: .78rem; letter-spacing: .12em; color: var(--magenta); margin-bottom: 14px; display: block; }
 h2 { font-family: 'Big Shoulders Display', sans-serif; text-transform: uppercase; font-weight: 800; font-size: clamp(2rem,4vw,2.9rem); line-height: 1; margin-bottom: 20px; }
@@ -178,7 +193,7 @@ footer { background: var(--ink); color: #B9B3AA; padding: 56px 0 28px; border-to
 </div>
 
 <!-- PROCESO 5 PASOS -->
-<section class="section">
+<section class="section-hero-bg">
   <div class="wrap">
     <span class="kicker">NUESTRO PROCESO</span>
     <h2>El proceso en 5 pasos</h2>
