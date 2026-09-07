@@ -775,42 +775,51 @@ footer { background: var(--ink); color: #B9B3AA; padding: 56px 0 28px; border-to
 /* ===== HERO MOBILE FIXES ===== */
 @media(max-width: 768px) {
 
-  /* Hero: se adapta al contenido, sin altura fija */
+  /* Hero mobile: imagen vertical define la altura */
   .hero {
     min-height: 0 !important;
     height: auto !important;
     position: relative !important;
+    overflow: hidden !important;
   }
 
-  /* Imagen: absoluta detrás del contenido */
+  /* hero-bg fluye con la imagen */
   .hero-bg {
-    position: absolute !important;
-    inset: 0 !important;
-    height: 100% !important;
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
   }
 
   .hero-bg-img {
-    object-position: 65% center !important;
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    object-fit: unset !important;
   }
 
-  /* Overlay */
+  /* Overlay sobre la imagen */
   .hero-overlay {
+    position: absolute !important;
+    inset: 0 !important;
     background: linear-gradient(
       to bottom,
-      rgba(5,10,13,0.50) 0%,
-      rgba(5,10,13,0.78) 55%,
-      rgba(5,10,13,0.96) 100%
+      rgba(5,10,13,0.30) 0%,
+      rgba(5,10,13,0.70) 55%,
+      rgba(5,10,13,0.95) 100%
     ) !important;
   }
 
-  /* Contenido: fluye normalmente, define la altura del hero */
+  /* Contenido: absoluto, texto pegado al fondo */
   .hero-content {
-    position: relative !important;
+    position: absolute !important;
+    inset: 0 !important;
     z-index: 2 !important;
     min-height: 0 !important;
-    height: auto !important;
-    justify-content: flex-start !important;
-    padding: 36px 20px 32px !important;
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-end !important;
+    padding: 0 20px 28px !important;
   }
 
   .hero-inner-layout {
@@ -883,7 +892,10 @@ footer { background: var(--ink); color: #B9B3AA; padding: 56px 0 28px; border-to
   <!-- HERO -->
   <section class="hero" id="top">
     <div class="hero-bg">
-      <img class="hero-bg-img" src="imagenes/hero_desk.png" alt="JFtri Club">
+      <picture>
+        <source media="(max-width: 768px)" srcset="imagenes/hero_mobile.png">
+        <img class="hero-bg-img" src="imagenes/hero_desk.png" alt="JFtri Club">
+      </picture>
     </div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
