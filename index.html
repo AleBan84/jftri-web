@@ -775,30 +775,41 @@ footer { background: var(--ink); color: #B9B3AA; padding: 56px 0 28px; border-to
 /* ===== HERO MOBILE FIXES ===== */
 @media(max-width: 768px) {
 
-  /* Foto: recortar hacia arriba-derecha donde está la acción */
-  .hero-bg-img {
-    object-position: 70% top;
+  /* Hero: altura fija compacta */
+  .hero {
+    min-height: 0 !important;
+    height: 340px !important;
   }
 
-  /* Overlay más oscuro en mobile para legibilidad */
+  /* Imagen ocupa exactamente el hero */
+  .hero-bg {
+    position: absolute !important;
+    inset: 0 !important;
+    height: 100% !important;
+  }
+
+  .hero-bg-img {
+    object-position: 65% center !important;
+  }
+
+  /* Overlay */
   .hero-overlay {
     background: linear-gradient(
       to bottom,
-      rgba(5,10,13,0.72) 0%,
-      rgba(5,10,13,0.80) 50%,
-      rgba(5,10,13,0.85) 100%
+      rgba(5,10,13,0.45) 0%,
+      rgba(5,10,13,0.75) 55%,
+      rgba(5,10,13,0.95) 100%
     ) !important;
   }
 
-  /* Hero más compacto: menos altura, contenido arriba */
-  .hero {
-    min-height: 0 !important;
-  }
-
+  /* Contenido pegado al fondo */
   .hero-content {
+    position: absolute !important;
+    inset: 0 !important;
     min-height: 0 !important;
-    justify-content: flex-start !important;
-    padding: 28px 20px 36px !important;
+    height: 100% !important;
+    justify-content: flex-end !important;
+    padding: 0 20px 24px !important;
   }
 
   .hero-inner-layout {
@@ -807,35 +818,34 @@ footer { background: var(--ink); color: #B9B3AA; padding: 56px 0 28px; border-to
     gap: 0 !important;
   }
 
-  /* Título más arriba y más grande */
   h1.hero-title {
-    font-size: clamp(2.6rem, 11vw, 3.8rem) !important;
-    margin-bottom: 14px !important;
+    font-size: clamp(2.4rem, 10vw, 3.4rem) !important;
+    margin-bottom: 10px !important;
     margin-top: 0 !important;
+    line-height: 0.9 !important;
   }
 
-  /* Subtítulo ajustado */
   .hero-sub {
-    font-size: 0.9rem !important;
-    margin-bottom: 20px !important;
+    font-size: 0.88rem !important;
+    margin-bottom: 18px !important;
     max-width: 100% !important;
+    line-height: 1.5 !important;
   }
 
-  /* Ocultar iconos swim/bike/run en mobile */
+  /* Ocultar iconos swim/bike/run */
   .hero-disciplines {
     display: none !important;
   }
 
-  /* Botón más corto y compacto */
+  /* Botón compacto */
   .hero-main-cta {
     margin-top: 0 !important;
-    padding: 13px 20px !important;
+    padding: 12px 22px !important;
     font-size: 0.82rem !important;
-    width: auto !important;
     display: inline-block !important;
   }
 
-  /* Ocultar columna derecha (vacía) */
+  /* Ocultar col derecha */
   .hero-right-col {
     display: none !important;
   }
