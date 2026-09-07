@@ -648,8 +648,8 @@ section { padding: 96px 0; }
   position: absolute; inset: 0; z-index: 0;
   display: flex; align-items: center; justify-content: center;
 }
-.disc-card-bg.tri { background: linear-gradient(135deg, #0E4E48 0%, #061a18 60%, #1C1815 100%); }
-.disc-card-bg.run { background: linear-gradient(135deg, #2a0d2a 0%, #1a051a 60%, #1C1815 100%); }
+.disc-card-bg.tri { background: url("imagenes/hero_tri.png") center/cover no-repeat; }
+.disc-card-bg.run { background: url("imagenes/hero_running.png") center/cover no-repeat; }
 .disc-card-bg::before {
   content: ""; position: absolute; inset: 0;
   background: radial-gradient(ellipse at 40% 30%, rgba(43,210,197,.15) 0%, transparent 60%);
@@ -659,6 +659,7 @@ section { padding: 96px 0; }
 }
 .disc-card-emoji { display: none; }
 .disc-card-overlay {
+  background: rgba(0,0,0,0.55);
   position: absolute; inset: 0; z-index: 1;
   background: linear-gradient(to top, rgba(28,24,21,.92) 0%, rgba(28,24,21,.2) 60%, transparent 100%);
 }
