@@ -808,15 +808,14 @@ footer { background: var(--ink); color: #B9B3AA; padding: 56px 0 28px; border-to
     ) !important;
   }
 
-  /* Contenido sobre el overlay, pegado al fondo */
+  /* Contenido: ocupa todo el hero, texto al fondo con margin-top auto */
   .hero-content {
-    position: relative !important;
+    position: absolute !important;
+    inset: 0 !important;
     z-index: 2 !important;
-    min-height: 0 !important;
-    height: auto !important;
     display: flex !important;
     flex-direction: column !important;
-    justify-content: flex-end !important;
+    justify-content: flex-start !important;
     padding: 0 20px 24px !important;
   }
 
@@ -825,6 +824,7 @@ footer { background: var(--ink); color: #B9B3AA; padding: 56px 0 28px; border-to
     align-items: flex-start !important;
     gap: 0 !important;
     width: 100% !important;
+    margin-top: auto !important;
   }
 
   .hero-left-col {
