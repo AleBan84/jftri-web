@@ -1294,8 +1294,8 @@ footer { background: var(--ink); color: #B9B3AA; padding: 56px 0 28px; border-to
             <input type="email" id="f-email" placeholder="tu@email.com">
           </div>
           <div class="field">
-            <label>WHATSAPP</label>
-            <input type="tel" id="f-tel" placeholder="+56 9 xxxx xxxx">
+            <label>TELÉFONO</label>
+            <input type="tel" id="f-tel" placeholder="9 xxxx xxxx" maxlength="9">
           </div>
           <div class="field">
             <label>¿QUÉ TE INTERESA?</label>
@@ -1438,7 +1438,7 @@ function enviarWA() {
     document.getElementById('f-plan').value = '';
     document.getElementById('f-mensaje').value = '';
   }, function(error) {
-    btn.textContent = 'ENVIAR POR WHATSAPP →';
+    btn.textContent = 'ENVIAR POR TELÉFONO →';
     btn.disabled = false;
     alert('Hubo un error. Por favor intentá de nuevo.');
     console.error('EmailJS error:', error);
