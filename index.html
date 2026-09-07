@@ -775,13 +775,14 @@ footer { background: var(--ink); color: #B9B3AA; padding: 56px 0 28px; border-to
 /* ===== HERO MOBILE FIXES ===== */
 @media(max-width: 768px) {
 
-  /* Hero: altura fija compacta */
+  /* Hero: se adapta al contenido, sin altura fija */
   .hero {
     min-height: 0 !important;
-    height: 340px !important;
+    height: auto !important;
+    position: relative !important;
   }
 
-  /* Imagen ocupa exactamente el hero */
+  /* Imagen: absoluta detrás del contenido */
   .hero-bg {
     position: absolute !important;
     inset: 0 !important;
@@ -796,20 +797,20 @@ footer { background: var(--ink); color: #B9B3AA; padding: 56px 0 28px; border-to
   .hero-overlay {
     background: linear-gradient(
       to bottom,
-      rgba(5,10,13,0.45) 0%,
-      rgba(5,10,13,0.75) 55%,
-      rgba(5,10,13,0.95) 100%
+      rgba(5,10,13,0.50) 0%,
+      rgba(5,10,13,0.78) 55%,
+      rgba(5,10,13,0.96) 100%
     ) !important;
   }
 
-  /* Contenido pegado al fondo */
+  /* Contenido: fluye normalmente, define la altura del hero */
   .hero-content {
-    position: absolute !important;
-    inset: 0 !important;
+    position: relative !important;
+    z-index: 2 !important;
     min-height: 0 !important;
-    height: 100% !important;
-    justify-content: flex-end !important;
-    padding: 0 20px 24px !important;
+    height: auto !important;
+    justify-content: flex-start !important;
+    padding: 36px 20px 32px !important;
   }
 
   .hero-inner-layout {
@@ -819,7 +820,7 @@ footer { background: var(--ink); color: #B9B3AA; padding: 56px 0 28px; border-to
   }
 
   h1.hero-title {
-    font-size: clamp(2.4rem, 10vw, 3.4rem) !important;
+    font-size: clamp(1.8rem, 7.5vw, 2.4rem) !important;
     margin-bottom: 10px !important;
     margin-top: 0 !important;
     line-height: 0.9 !important;
