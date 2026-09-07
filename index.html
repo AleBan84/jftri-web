@@ -773,6 +773,8 @@ footer { background: var(--ink); color: #B9B3AA; padding: 56px 0 28px; border-to
 .foot-nav-group a:hover { color: var(--teal); }
 .foot-bottom { padding-top: 24px; border-top: 1px solid var(--line-light); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; font-size: .78rem; }
 </style>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>emailjs.init("_VTsaBcs94E8PUGEH");</script>
 </head>
 <body>
 
@@ -830,7 +832,7 @@ footer { background: var(--ink); color: #B9B3AA; padding: 56px 0 28px; border-to
               <span class="hero-disc-label">RUN</span>
             </div>
           </div>
-          <a href="https://wa.me/56945289477" class="hero-main-cta" style="margin-top:28px;font-size:.85rem;padding:12px 24px;display:inline-block;">AGENDA UNA CLASE DE PRUEBA AQUÍ →</a>
+          <a href="#inscripcion" class="hero-main-cta" style="margin-top:28px;font-size:.85rem;padding:12px 24px;display:inline-block;">AGENDA UNA CLASE DE PRUEBA AQUÍ →</a>
         </div>
 
       </div>
@@ -998,7 +1000,7 @@ footer { background: var(--ink); color: #B9B3AA; padding: 56px 0 28px; border-to
           <p class="where-loc"><span class="pin">📍</span> Estadio Mayor, Peñalolén — Santiago</p>
           <div class="where-note">Ven a una clase de prueba gratis. Solo trae zapatillas, ropa cómoda y ganas de entrenar. Si es triatlón: gorra, lentes, short y toalla.</div>
           <div style="margin-top:28px;">
-            <a href="https://wa.me/56945289477" class="btn btn-primary">INSCRÍBETE AHORA</a>
+            <a href="#inscripcion" class="btn btn-primary">INSCRÍBETE AHORA</a>
           </div>
         </div>
         <div class="sched-grid reveal">
@@ -1313,7 +1315,7 @@ footer { background: var(--ink); color: #B9B3AA; padding: 56px 0 28px; border-to
             <textarea id="f-mensaje" placeholder="Cuéntanos sobre tu experiencia o tus objetivos..."></textarea>
           </div>
           <div class="form-submit">
-            <button type="button" onclick="enviarWA()" class="btn btn-primary" style="width:100%;justify-content:center;">ENVIAR POR WHATSAPP →</button>
+            <button type="button" onclick="enviarWA()" class="btn btn-primary" style="width:100%;justify-content:center;">ENVIAR →</button>
           </div>
         </div>
         <div class="form-info">
@@ -1324,20 +1326,7 @@ footer { background: var(--ink); color: #B9B3AA; padding: 56px 0 28px; border-to
               <p>Estadio Mayor, Peñalolén, Santiago. También disponible 100% online desde cualquier parte.</p>
             </div>
           </div>
-          <div class="info-item">
-            <div class="info-icon">📱</div>
-            <div>
-              <h4>WhatsApp directo</h4>
-              <p>+56 9 4528 9477 — respuesta en menos de 24 horas hábiles.</p>
-            </div>
-          </div>
-          <div class="info-item">
-            <div class="info-icon">✉️</div>
-            <div>
-              <h4>Email</h4>
-              <p>jf.deportes@gmail.com</p>
-            </div>
-          </div>
+
           <div class="info-item">
             <div class="info-icon">🆓</div>
             <div>
@@ -1418,25 +1407,42 @@ document.querySelectorAll('.disc-tab').forEach(tab => {
 
 <script>
 function enviarWA() {
-  var nombre  = document.getElementById('f-nombre').value.trim();
+  var nombre   = document.getElementById('f-nombre').value.trim();
   var apellido = document.getElementById('f-apellido').value.trim();
-  var email   = document.getElementById('f-email').value.trim();
-  var tel     = document.getElementById('f-tel').value.trim();
-  var plan    = document.getElementById('f-plan').value.trim();
-  var mensaje = document.getElementById('f-mensaje').value.trim();
+  var email    = document.getElementById('f-email').value.trim();
+  var tel      = document.getElementById('f-tel').value.trim();
+  var plan     = document.getElementById('f-plan').value.trim();
+  var mensaje  = document.getElementById('f-mensaje').value.trim();
 
   if (!nombre) { alert('Por favor ingresá tu nombre.'); return; }
   if (!tel)    { alert('Por favor ingresá tu WhatsApp.'); return; }
 
-  var texto = '¡Hola! Me interesa JFtri 🏃\n\n'
-    + '👤 Nombre: ' + nombre + ' ' + apellido + '\n'
-    + '📧 Email: '  + (email || 'No indicado') + '\n'
-    + '📱 Tel: '    + tel + '\n'
-    + '📋 Plan: '   + (plan || 'No seleccionado') + '\n'
-    + '💬 Mensaje: '+ (mensaje || 'Sin mensaje');
+  var btn = document.querySelector('.form-submit button');
+  btn.textContent = 'Enviando...';
+  btn.disabled = true;
 
-  var url = 'https://wa.me/56945289477?text=' + encodeURIComponent(texto);
-  window.open(url, '_blank');
+  emailjs.send('service_z0o1a4g', 'template_iukexho', {
+    nombre:   nombre,
+    apellido: apellido,
+    email:    email || 'No indicado',
+    telefono: tel,
+    plan:     plan || 'No seleccionado',
+    mensaje:  mensaje || 'Sin mensaje'
+  }).then(function() {
+    btn.textContent = '✓ ¡Mensaje enviado!';
+    btn.style.background = '#2BD2C5';
+    document.getElementById('f-nombre').value = '';
+    document.getElementById('f-apellido').value = '';
+    document.getElementById('f-email').value = '';
+    document.getElementById('f-tel').value = '';
+    document.getElementById('f-plan').value = '';
+    document.getElementById('f-mensaje').value = '';
+  }, function(error) {
+    btn.textContent = 'ENVIAR POR WHATSAPP →';
+    btn.disabled = false;
+    alert('Hubo un error. Por favor intentá de nuevo.');
+    console.error('EmailJS error:', error);
+  });
 }
 </script>
 
