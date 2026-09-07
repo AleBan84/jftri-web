@@ -1295,7 +1295,10 @@ footer { background: var(--ink); color: #B9B3AA; padding: 56px 0 28px; border-to
           </div>
           <div class="field">
             <label>TELÉFONO</label>
-            <input type="tel" id="f-tel" placeholder="9 xxxx xxxx" maxlength="9">
+            <div style="display:flex;align-items:center;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:8px;overflow:hidden;">
+              <span style="padding:0 12px;color:rgba(255,255,255,.5);font-size:.95rem;white-space:nowrap;border-right:1px solid rgba(255,255,255,.15);">+56 9</span>
+              <input type="tel" id="f-tel" placeholder="xxxx xxxx" maxlength="8" style="border:none!important;background:transparent;flex:1;padding:14px 16px;">
+            </div>
           </div>
           <div class="field">
             <label>¿QUÉ TE INTERESA?</label>
@@ -1406,43 +1409,47 @@ document.querySelectorAll('.disc-tab').forEach(tab => {
 </script>
 
 <script>
-function enviarWA() {
-  var nombre   = document.getElementById('f-nombre').value.trim();
-  var apellido = document.getElementById('f-apellido').value.trim();
-  var email    = document.getElementById('f-email').value.trim();
-  var tel      = document.getElementById('f-tel').value.trim();
-  var plan     = document.getElementById('f-plan').value.trim();
-  var mensaje  = document.getElementById('f-mensaje').value.trim();
-
-  if (!nombre) { alert('Por favor ingresá tu nombre.'); return; }
-  if (!tel)    { alert('Por favor ingresá tu WhatsApp.'); return; }
-
-  var btn = document.querySelector('.form-submit button');
-  btn.textContent = 'Enviando...';
-  btn.disabled = true;
-
-  emailjs.send('service_z0o1a4g', 'template_iukexho', {
-    nombre:   nombre,
-    apellido: apellido,
-    email:    email || 'No indicado',
-    telefono: tel,
-    plan:     plan || 'No seleccionado',
-    mensaje:  mensaje || 'Sin mensaje'
-  }).then(function() {
-    btn.textContent = '✓ ¡Mensaje enviado!';
-    btn.style.background = '#2BD2C5';
-    document.getElementById('f-nombre').value = '';
-    document.getElementById('f-apellido').value = '';
-    document.getElementById('f-email').value = '';
-    document.getElementById('f-tel').value = '';
-    document.getElementById('f-plan').value = '';
-    document.getElementById('f-mensaje').value = '';
-  }, function(error) {
-    btn.textContent = 'ENVIAR POR TELÉFONO →';
-    btn.disabled = false;
-    alert('Hubo un error. Por favor intentá de nuevo.');
-    console.error('EmailJS error:', error);
-  });
+function soloLetras(e){var c=String.fromCharCode(e.which);if(!/[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ ]/.test(c))e.preventDefault();}
+function soloNumeros(e){var c=String.fromCharCode(e.which);if(!/[0-9]/.test(c))e.preventDefault();}
+window.addEventListener('DOMContentLoaded',function(){
+  document.getElementById('f-nombre').addEventListener('keypress',soloLetras);
+  document.getElementById('f-apellido').addEventListener('keypress',soloLetras);
+  document.getElementById('f-tel').addEventListener('keypress',soloNumeros);
+});
+function mostrarError(id,msg){
+  var el=document.getElementById(id);el.style.border='2px solid #E51675';
+  var err=document.getElementById('err-'+id);
+  if(!err){err=document.createElement('span');err.id='err-'+id;err.style.cssText='color:#E51675;font-size:.75rem;margin-top:4px;display:block;';el.parentNode.appendChild(err);}
+  err.textContent=msg;
+}
+function limpiarError(id){
+  var el=document.getElementById(id);el.style.border='';
+  var err=document.getElementById('err-'+id);if(err)err.remove();
+}
+function enviarWA(){
+  var nombre=document.getElementById('f-nombre').value.trim();
+  var apellido=document.getElementById('f-apellido').value.trim();
+  var email=document.getElementById('f-email').value.trim();
+  var tel=document.getElementById('f-tel').value.trim();
+  var plan=document.getElementById('f-plan').value.trim();
+  var mensaje=document.getElementById('f-mensaje').value.trim();
+  var valido=true;
+  var reLetras=/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ ]+$/;
+  var reEmail=/^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+  var reTel=/^[0-9]{8}$/;
+  if(!nombre||!reLetras.test(nombre)){mostrarError('f-nombre','Solo letras, sin números ni caracteres especiales');valido=false;}else limpiarError('f-nombre');
+  if(!apellido||!reLetras.test(apellido)){mostrarError('f-apellido','Solo letras, sin números ni caracteres especiales');valido=false;}else limpiarError('f-apellido');
+  if(!email||!reEmail.test(email)){mostrarError('f-email','Ingresá un email válido (ej: nombre@correo.com)');valido=false;}else limpiarError('f-email');
+  if(!tel||!reTel.test(tel)){mostrarError('f-tel','Ingresá exactamente 8 dígitos numéricos');valido=false;}else limpiarError('f-tel');
+  if(!plan){mostrarError('f-plan','Seleccioná un plan');valido=false;}else limpiarError('f-plan');
+  if(!valido)return;
+  var btn=document.querySelector('.form-submit button');
+  btn.textContent='Enviando...';btn.disabled=true;
+  emailjs.send('service_z0o1a4g','template_iukexho',{nombre:nombre,apellido:apellido,email:email,telefono:"+569"+tel,plan:plan,mensaje:mensaje||'Sin mensaje'}).then(function(){
+    btn.textContent='✓ Mensaje enviado!';btn.style.background='#2BD2C5';
+    ['f-nombre','f-apellido','f-email','f-tel','f-mensaje'].forEach(function(id){document.getElementById(id).value='';});
+    document.getElementById('f-plan').selectedIndex=0;
+  },function(){btn.textContent='ENVIAR →';btn.disabled=false;alert('Hubo un error. Intentá de nuevo.');});
 }
 </script>
 
