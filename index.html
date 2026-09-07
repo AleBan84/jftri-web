@@ -368,6 +368,7 @@ h1.hero-title {
 }
 
 .hero-main-cta {
+  margin-top: 28px;
   background: #EC006A;
   color: #fff;
   font-family: 'Work Sans', sans-serif;
@@ -775,67 +776,68 @@ footer { background: var(--ink); color: #B9B3AA; padding: 56px 0 28px; border-to
 /* ===== HERO MOBILE FIXES ===== */
 @media(max-width: 768px) {
 
-  /* Hero mobile: altura fija, sin aire */
+  /* ── HERO MOBILE COMPLETO ── */
   .hero {
-    min-height: 0 !important;
-    height: 110vw !important;
-    max-height: 480px !important;
     position: relative !important;
-    overflow: hidden !important;
-  }
-
-  /* Imagen absoluta recortada */
-  .hero-bg {
-    position: absolute !important;
-    inset: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-  }
-
-  .hero-bg-img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    object-position: center 30% !important;
-    display: block !important;
-  }
-
-  /* Overlay */
-  .hero-overlay {
-    position: absolute !important;
-    inset: 0 !important;
-    background: linear-gradient(
-      to bottom,
-      rgba(5,10,13,0.30) 0%,
-      rgba(5,10,13,0.70) 55%,
-      rgba(5,10,13,0.95) 100%
-    ) !important;
-  }
-
-  /* Contenido: absoluto, texto pegado al fondo */
-  .hero-content {
-    position: absolute !important;
-    inset: 0 !important;
-    z-index: 2 !important;
     min-height: 0 !important;
-    height: 100% !important;
+    height: auto !important;
+    overflow: hidden !important;
+    background-image: url('imagenes/hero_mobile.png') !important;
+    background-size: cover !important;
+    background-position: center center !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: flex-end !important;
-    padding: 0 20px 22px !important;
+  }
+
+  /* Ocultar el <img> y hero-bg — usamos background-image */
+  .hero-bg {
+    display: none !important;
+  }
+
+  /* Overlay degradado de abajo hacia arriba */
+  .hero-overlay {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 1 !important;
+    background: linear-gradient(
+      to bottom,
+      rgba(5,10,13,0.20) 0%,
+      rgba(5,10,13,0.65) 50%,
+      rgba(5,10,13,0.92) 100%
+    ) !important;
+  }
+
+  /* Contenido sobre el overlay, pegado al fondo */
+  .hero-content {
+    position: relative !important;
+    z-index: 2 !important;
+    min-height: 0 !important;
+    height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-end !important;
+    padding: 160px 20px 28px !important;
   }
 
   .hero-inner-layout {
     flex-direction: column !important;
     align-items: flex-start !important;
     gap: 0 !important;
+    width: 100% !important;
+  }
+
+  .hero-left-col {
+    max-width: 100% !important;
+    width: 100% !important;
   }
 
   h1.hero-title {
-    font-size: clamp(1.8rem, 7.5vw, 2.4rem) !important;
+    font-size: clamp(1.9rem, 8vw, 2.6rem) !important;
     margin-bottom: 10px !important;
     margin-top: 0 !important;
-    line-height: 0.9 !important;
+    line-height: 0.92 !important;
+    display: block !important;
   }
 
   .hero-sub {
@@ -843,14 +845,13 @@ footer { background: var(--ink); color: #B9B3AA; padding: 56px 0 28px; border-to
     margin-bottom: 18px !important;
     max-width: 100% !important;
     line-height: 1.5 !important;
+    display: block !important;
   }
 
-  /* Ocultar iconos swim/bike/run */
   .hero-disciplines {
     display: none !important;
   }
 
-  /* Botón compacto */
   .hero-main-cta {
     margin-top: 0 !important;
     padding: 12px 22px !important;
@@ -858,7 +859,6 @@ footer { background: var(--ink); color: #B9B3AA; padding: 56px 0 28px; border-to
     display: inline-block !important;
   }
 
-  /* Ocultar col derecha */
   .hero-right-col {
     display: none !important;
   }
@@ -926,7 +926,7 @@ footer { background: var(--ink); color: #B9B3AA; padding: 56px 0 28px; border-to
               <span class="hero-disc-label">RUN</span>
             </div>
           </div>
-          <a href="#inscripcion" class="hero-main-cta" style="margin-top:28px;font-size:.85rem;padding:12px 24px;display:inline-block;">AGENDAR CLASE DE PRUEBA →</a>
+          <a href="#inscripcion" class="hero-main-cta">AGENDAR CLASE DE PRUEBA →</a>
         </div>
 
       </div>
