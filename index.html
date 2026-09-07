@@ -775,29 +775,32 @@ footer { background: var(--ink); color: #B9B3AA; padding: 56px 0 28px; border-to
 /* ===== HERO MOBILE FIXES ===== */
 @media(max-width: 768px) {
 
-  /* Hero mobile: imagen vertical define la altura */
+  /* Hero mobile: altura fija, sin aire */
   .hero {
     min-height: 0 !important;
-    height: auto !important;
+    height: 75vw !important;
+    max-height: 380px !important;
     position: relative !important;
     overflow: hidden !important;
   }
 
-  /* hero-bg fluye con la imagen */
+  /* Imagen absoluta recortada */
   .hero-bg {
-    position: relative !important;
+    position: absolute !important;
+    inset: 0 !important;
     width: 100% !important;
-    height: auto !important;
+    height: 100% !important;
   }
 
   .hero-bg-img {
     width: 100% !important;
-    height: auto !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center 30% !important;
     display: block !important;
-    object-fit: unset !important;
   }
 
-  /* Overlay sobre la imagen */
+  /* Overlay */
   .hero-overlay {
     position: absolute !important;
     inset: 0 !important;
@@ -819,7 +822,7 @@ footer { background: var(--ink); color: #B9B3AA; padding: 56px 0 28px; border-to
     display: flex !important;
     flex-direction: column !important;
     justify-content: flex-end !important;
-    padding: 0 20px 28px !important;
+    padding: 0 20px 22px !important;
   }
 
   .hero-inner-layout {
