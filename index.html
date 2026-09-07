@@ -1037,7 +1037,12 @@ footer { background: var(--ink); color: #B9B3AA; padding: 56px 0 28px; border-to
             <span class="gallery-cta" style="font-family:'Work Sans',sans-serif;font-size:.85rem;font-weight:600;color:#2BD2C5;">Ver fotos →</span>
           </div>
         </div>
-        <div class="gallery-item reveal gallery-trigger" style="background:url('imagenes/eventos/aguas_abiertas_mayor1.jpeg') center/cover no-repeat; cursor:pointer;" onclick="openLightbox(1)"></div>
+        <div class="gallery-item reveal gallery-trigger" style="background:url('imagenes/competencias/alvaro_patagonia_3.jpeg') center/cover no-repeat; cursor:pointer; position:relative;" onclick="openLightbox2(0)">
+          <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,.9) 0%, transparent 50%);display:flex;flex-direction:column;justify-content:flex-end;padding:14px 16px;border-radius:inherit;">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:#fff;letter-spacing:.06em;">📍 Patagonian International Marathon®</span>
+            <span style="font-family:'Work Sans',sans-serif;font-size:.78rem;font-weight:600;color:#2BD2C5;">Ver fotos →</span>
+          </div>
+        </div>
         <div class="gallery-item reveal gallery-trigger" style="background:url('imagenes/eventos/aguas_abiertas_mayor2.jpeg') center/cover no-repeat; cursor:pointer;" onclick="openLightbox(2)"></div>
         <div class="gallery-item reveal gallery-trigger" style="background:url('imagenes/eventos/aguas_abiertas_mayor3.jpeg') center/cover no-repeat; cursor:pointer;" onclick="openLightbox(3)"></div>
         <div class="gallery-item reveal gallery-trigger" style="background:url('imagenes/eventos/aguas_abiertas_mayor5.jpeg') center/cover no-repeat; cursor:pointer;" onclick="openLightbox(4)"></div>
@@ -1454,6 +1459,42 @@ document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closeLightbox();
   }
 });
+</script>
+
+<script>
+var photos2 = [
+  { src: 'imagenes/competencias/alvaro_patagonia_3.jpeg', caption: 'Patagonian International Marathon®' },
+  { src: 'imagenes/competencias/patagonia_anita_1.jpeg',  caption: 'Patagonian International Marathon®' },
+  { src: 'imagenes/competencias/patagonia_anita_3.jpeg',  caption: 'Patagonian International Marathon®' },
+];
+var current2 = 0;
+
+function openLightbox2(idx) {
+  current2 = idx;
+  showPhoto2();
+  var lb = document.getElementById('lightbox');
+  lb.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function showPhoto2() {
+  document.getElementById('lightbox-img').src = photos2[current2].src;
+  document.getElementById('lightbox-caption').textContent = photos2[current2].caption;
+  document.getElementById('lightbox-counter').textContent = (current2+1) + ' / ' + photos2.length;
+}
+// Override next/prev para segundo lightbox
+var activeGallery = 1;
+document.addEventListener('click', function(e) {
+  if (e.target.closest('[onclick^="openLightbox2"]')) activeGallery = 2;
+  if (e.target.closest('[onclick^="openLightbox("]')) activeGallery = 1;
+});
+function nextPhoto() {
+  if (activeGallery === 2) { current2 = (current2 + 1) % photos2.length; showPhoto2(); }
+  else { current = (current + 1) % photos.length; showPhoto(); }
+}
+function prevPhoto() {
+  if (activeGallery === 2) { current2 = (current2 - 1 + photos2.length) % photos2.length; showPhoto2(); }
+  else { current = (current - 1 + photos.length) % photos.length; showPhoto(); }
+}
 </script>
 </body>
 </html>
