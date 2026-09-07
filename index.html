@@ -1043,7 +1043,12 @@ footer { background: var(--ink); color: #B9B3AA; padding: 56px 0 28px; border-to
             <span style="font-family:'Work Sans',sans-serif;font-size:.78rem;font-weight:600;color:#2BD2C5;">Ver fotos →</span>
           </div>
         </div>
-        <div class="gallery-item reveal gallery-trigger" style="background:url('imagenes/eventos/aguas_abiertas_mayor2.jpeg') center/cover no-repeat; cursor:pointer;" onclick="openLightbox(2)"></div>
+        <div class="gallery-item reveal gallery-trigger" style="background:url('imagenes/competencias/duatlon_presi_1.jpeg') center/cover no-repeat; cursor:pointer; position:relative;" onclick="openLightbox3(0)">
+          <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,.9) 0%, transparent 50%);display:flex;flex-direction:column;justify-content:flex-end;padding:14px 16px;border-radius:inherit;">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:#fff;letter-spacing:.06em;">🏊🚴 Duatlones y Triatlones · 2do Semestre 2026</span>
+            <span style="font-family:'Work Sans',sans-serif;font-size:.78rem;font-weight:600;color:#2BD2C5;">Ver fotos →</span>
+          </div>
+        </div>
         <div class="gallery-item reveal gallery-trigger" style="background:url('imagenes/eventos/aguas_abiertas_mayor3.jpeg') center/cover no-repeat; cursor:pointer;" onclick="openLightbox(3)"></div>
         <div class="gallery-item reveal gallery-trigger" style="background:url('imagenes/eventos/aguas_abiertas_mayor5.jpeg') center/cover no-repeat; cursor:pointer;" onclick="openLightbox(4)"></div>
         <div class="gallery-item reveal gallery-trigger" style="background:url('imagenes/eventos/aguas_abiertas_mayor6.jpeg') center/cover no-repeat; cursor:pointer;" onclick="openLightbox(5)"></div>
@@ -1506,6 +1511,45 @@ function nextPhoto() {
 function prevPhoto() {
   if (activeGallery === 2) { current2 = (current2 - 1 + photos2.length) % photos2.length; showPhoto2(); }
   else { current = (current - 1 + photos.length) % photos.length; showPhoto(); }
+}
+</script>
+
+<script>
+var photos3 = [
+  { src: 'imagenes/competencias/duatlon_presi_1.jpeg',  caption: 'Duatlones y Triatlones · 2do Semestre 2026' },
+  { src: 'imagenes/competencias/duatlon_presi_2.jpeg',  caption: 'Duatlones y Triatlones · 2do Semestre 2026' },
+  { src: 'imagenes/competencias/duatlon_presi_3.jpeg',  caption: 'Duatlones y Triatlones · 2do Semestre 2026' },
+  { src: 'imagenes/competencias/duatlon_tiare_!.jpeg',  caption: 'Duatlones y Triatlones · 2do Semestre 2026' },
+  { src: 'imagenes/competencias/duatlon_tiare_3.jpeg',  caption: 'Duatlones y Triatlones · 2do Semestre 2026' },
+  { src: 'imagenes/competencias/duatlon_tire_2.jpeg',   caption: 'Duatlones y Triatlones · 2do Semestre 2026' },
+  { src: 'imagenes/competencias/triasa_fraco_10.jpeg',  caption: 'Duatlones y Triatlones · 2do Semestre 2026' },
+  { src: 'imagenes/competencias/triasa_fraco_11.jpeg',  caption: 'Duatlones y Triatlones · 2do Semestre 2026' },
+  { src: 'imagenes/competencias/triasa_fraco_1¿4.png',  caption: 'Duatlones y Triatlones · 2do Semestre 2026' },
+  { src: 'imagenes/competencias/triasa_fraco_7.jpeg',   caption: 'Duatlones y Triatlones · 2do Semestre 2026' },
+];
+var current3 = 0;
+
+function openLightbox3(idx) {
+  current3 = idx;
+  activeGallery = 3;
+  showPhoto3();
+  document.getElementById('lightbox').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function showPhoto3() {
+  document.getElementById('lightbox-img').src = photos3[current3].src;
+  document.getElementById('lightbox-caption').textContent = photos3[current3].caption;
+  document.getElementById('lightbox-counter').textContent = (current3+1) + ' / ' + photos3.length;
+}
+var _nextPhoto = nextPhoto;
+var _prevPhoto = prevPhoto;
+nextPhoto = function() {
+  if (activeGallery === 3) { current3 = (current3 + 1) % photos3.length; showPhoto3(); }
+  else _nextPhoto();
+}
+prevPhoto = function() {
+  if (activeGallery === 3) { current3 = (current3 - 1 + photos3.length) % photos3.length; showPhoto3(); }
+  else _prevPhoto();
 }
 </script>
 </body>
