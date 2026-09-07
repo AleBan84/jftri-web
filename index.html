@@ -1031,28 +1031,27 @@ footer { background: var(--ink); color: #B9B3AA; padding: 56px 0 28px; border-to
         <p>Sesiones de entrenamiento, competencias y momentos del club. Las fotos se van actualizando con cada temporada.</p>
       </div>
       <div class="gallery-grid">
-        <div class="gallery-item large reveal" style="background:url('imagenes/eventos/aguas_abiertas_mayor.jpeg') center/cover no-repeat;">
+        <div class="gallery-item large reveal gallery-trigger" style="background:url('imagenes/eventos/aguas_abiertas_mayor.jpeg') center/cover no-repeat; cursor:pointer; position:relative;" onclick="openLightbox(0)">
+          <div class="gallery-overlay">
+            <span class="gallery-label">📍 Clínica de Aguas Abiertas · Estadio Mayor</span>
+            <span class="gallery-cta">Ver fotos →</span>
+          </div>
         </div>
-        <div class="gallery-item reveal">
-          <div class="ph-icon-sm">🚴</div>
-          <div class="ph-tag">salida en bici</div>
-        </div>
-        <div class="gallery-item reveal">
-          <div class="ph-icon-sm">🏃</div>
-          <div class="ph-tag">carrera a pie</div>
-        </div>
-        <div class="gallery-item reveal">
-          <div class="ph-icon-sm">🏅</div>
-          <div class="ph-tag">competencia</div>
-        </div>
-        <div class="gallery-item reveal">
-          <div class="ph-icon-sm">💪</div>
-          <div class="ph-tag">entrenamiento</div>
-        </div>
-        <div class="gallery-item reveal">
-          <div class="ph-icon-sm">📸</div>
-          <div class="ph-tag">momento del club</div>
-        </div>
+        <div class="gallery-item reveal gallery-trigger" style="background:url('imagenes/eventos/aguas_abiertas_mayor1.jpeg') center/cover no-repeat; cursor:pointer;" onclick="openLightbox(1)"></div>
+        <div class="gallery-item reveal gallery-trigger" style="background:url('imagenes/eventos/aguas_abiertas_mayor2.jpeg') center/cover no-repeat; cursor:pointer;" onclick="openLightbox(2)"></div>
+        <div class="gallery-item reveal gallery-trigger" style="background:url('imagenes/eventos/aguas_abiertas_mayor3.jpeg') center/cover no-repeat; cursor:pointer;" onclick="openLightbox(3)"></div>
+        <div class="gallery-item reveal gallery-trigger" style="background:url('imagenes/eventos/aguas_abiertas_mayor5.jpeg') center/cover no-repeat; cursor:pointer;" onclick="openLightbox(4)"></div>
+        <div class="gallery-item reveal gallery-trigger" style="background:url('imagenes/eventos/aguas_abiertas_mayor6.jpeg') center/cover no-repeat; cursor:pointer;" onclick="openLightbox(5)"></div>
+      </div>
+
+      <!-- LIGHTBOX -->
+      <div id="lightbox" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.92); z-index:999; align-items:center; justify-content:center; flex-direction:column;">
+        <button onclick="closeLightbox()" style="position:absolute; top:20px; right:28px; background:none; border:none; color:#fff; font-size:2rem; cursor:pointer;">✕</button>
+        <button onclick="prevPhoto()" style="position:absolute; left:20px; background:none; border:none; color:#fff; font-size:2.5rem; cursor:pointer;">‹</button>
+        <button onclick="nextPhoto()" style="position:absolute; right:20px; background:none; border:none; color:#fff; font-size:2.5rem; cursor:pointer;">›</button>
+        <img id="lightbox-img" src="" style="max-height:80vh; max-width:90vw; border-radius:12px; object-fit:contain;">
+        <div id="lightbox-caption" style="color:rgba(255,255,255,.6); font-family:'IBM Plex Mono',monospace; font-size:.75rem; margin-top:16px; letter-spacing:.08em;"></div>
+        <div id="lightbox-counter" style="color:rgba(255,255,255,.4); font-family:'IBM Plex Mono',monospace; font-size:.7rem; margin-top:6px;"></div>
       </div>
     </div>
   </section>
@@ -1417,6 +1416,44 @@ function enviarWA() {
   var url = 'https://wa.me/56945289477?text=' + encodeURIComponent(texto);
   window.open(url, '_blank');
 }
+</script>
+
+<script>
+var photos = [
+  { src: 'imagenes/eventos/aguas_abiertas_mayor.jpeg',  caption: 'Clínica de Aguas Abiertas · Estadio Mayor' },
+  { src: 'imagenes/eventos/aguas_abiertas_mayor1.jpeg', caption: 'Clínica de Aguas Abiertas · Estadio Mayor' },
+  { src: 'imagenes/eventos/aguas_abiertas_mayor2.jpeg', caption: 'Clínica de Aguas Abiertas · Estadio Mayor' },
+  { src: 'imagenes/eventos/aguas_abiertas_mayor3.jpeg', caption: 'Clínica de Aguas Abiertas · Estadio Mayor' },
+  { src: 'imagenes/eventos/aguas_abiertas_mayor5.jpeg', caption: 'Clínica de Aguas Abiertas · Estadio Mayor' },
+  { src: 'imagenes/eventos/aguas_abiertas_mayor6.jpeg', caption: 'Clínica de Aguas Abiertas · Estadio Mayor' },
+];
+var current = 0;
+
+function openLightbox(idx) {
+  current = idx;
+  showPhoto();
+  var lb = document.getElementById('lightbox');
+  lb.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').style.display = 'none';
+  document.body.style.overflow = '';
+}
+function showPhoto() {
+  document.getElementById('lightbox-img').src = photos[current].src;
+  document.getElementById('lightbox-caption').textContent = photos[current].caption;
+  document.getElementById('lightbox-counter').textContent = (current+1) + ' / ' + photos.length;
+}
+function nextPhoto() { current = (current + 1) % photos.length; showPhoto(); }
+function prevPhoto() { current = (current - 1 + photos.length) % photos.length; showPhoto(); }
+document.addEventListener('keydown', function(e) {
+  if (document.getElementById('lightbox').style.display === 'flex') {
+    if (e.key === 'ArrowRight') nextPhoto();
+    if (e.key === 'ArrowLeft') prevPhoto();
+    if (e.key === 'Escape') closeLightbox();
+  }
+});
 </script>
 </body>
 </html>
