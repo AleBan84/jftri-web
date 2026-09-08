@@ -100,15 +100,26 @@ header {
   }
   .hero-content {
     position: absolute !important;
-    bottom: 60px !important;
-    left: 0 !important;
-    right: 0 !important;
+    inset: 0 !important;
     top: auto !important;
     z-index: 2 !important;
-    padding: 0 20px 0 !important;
+    padding: 0 !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: flex-start !important;
+    justify-content: flex-end !important;
+  }
+  /* Texto sube, botón queda abajo */
+  .hero-inner-layout {
+    padding: 0 20px !important;
+    margin-bottom: 60px !important;
+  }
+  /* Botón pegado al fondo */
+  .hero-cta-mobile {
+    display: inline-block !important;
+    margin: 0 20px 24px !important;
+    padding: 12px 22px !important;
+    font-size: 0.82rem !important;
   }
   .hero-inner-layout {
     flex-direction: column !important;
@@ -122,7 +133,8 @@ header {
   h1.hero-title { font-size: clamp(1.9rem, 8vw, 2.6rem) !important; margin-bottom: 10px !important; margin-top: 0 !important; line-height: 0.92 !important; }
   .hero-sub { font-size: 0.88rem !important; margin-bottom: 18px !important; line-height: 1.5 !important; }
   .hero-disciplines { display: none !important; }
-  .hero-main-cta { margin-top: 0 !important; padding: 12px 22px !important; font-size: 0.82rem !important; display: inline-block !important; }
+  .hero-main-cta { display: none !important; }
+  .hero-cta-mobile { display: inline-block !important; }
   .hero-right-col { display: none !important; }
 }
 
@@ -880,10 +892,10 @@ footer { background: var(--ink); color: #B9B3AA; padding: 56px 0 28px; border-to
               <span class="hero-disc-label">RUN</span>
             </div>
           </div>
-          <a href="#inscripcion" class="hero-main-cta">AGENDAR CLASE DE PRUEBA →</a>
         </div>
 
       </div>
+      <a href="#inscripcion" class="hero-main-cta hero-cta-mobile">AGENDAR CLASE DE PRUEBA →</a>
     </div>
   </section>
 
