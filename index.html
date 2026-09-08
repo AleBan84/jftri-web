@@ -80,6 +80,48 @@ header {
   color: #fff;
 }
 
+@media(max-width: 768px) {
+  .hero {
+    min-height: 0 !important;
+    height: 480px !important;
+    display: block !important;
+    background-image: url('imagenes/hero_mobile.png') !important;
+    background-size: cover !important;
+    background-position: center top !important;
+  }
+  .hero-bg { display: none !important; }
+  .hero-overlay {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 1 !important;
+    background: linear-gradient(to bottom, rgba(5,10,13,0.10) 0%, rgba(5,10,13,0.55) 45%, rgba(5,10,13,0.92) 100%) !important;
+  }
+  .hero-content {
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: auto !important;
+    z-index: 2 !important;
+    padding: 0 20px 24px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+  .hero-inner-layout {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0 !important;
+    width: 100% !important;
+  }
+  .hero-left-col { max-width: 100% !important; width: 100% !important; }
+  h1.hero-title { font-size: clamp(1.9rem, 8vw, 2.6rem) !important; margin-bottom: 10px !important; margin-top: 0 !important; line-height: 0.92 !important; }
+  .hero-sub { font-size: 0.88rem !important; margin-bottom: 18px !important; line-height: 1.5 !important; }
+  .hero-disciplines { display: none !important; }
+  .hero-main-cta { margin-top: 0 !important; padding: 12px 22px !important; font-size: 0.82rem !important; display: inline-block !important; }
+  .hero-right-col { display: none !important; }
+}
+
 /* Foto de fondo placeholder */
 .hero-bg {
   position: absolute; inset: 0; z-index: 0;
@@ -773,85 +815,7 @@ footer { background: var(--ink); color: #B9B3AA; padding: 56px 0 28px; border-to
 .foot-nav-group a:hover { color: var(--teal); }
 .foot-bottom { padding-top: 24px; border-top: 1px solid var(--line-light); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; font-size: .78rem; }
 
-/* ===== HERO MOBILE FIXES ===== */
-@media(max-width: 768px) {
 
-  .hero {
-    position: relative !important;
-    height: 480px !important;
-    min-height: 0 !important;
-    overflow: hidden !important;
-    background-image: url('imagenes/hero_mobile.png') !important;
-    background-size: cover !important;
-    background-position: center top !important;
-    display: block !important;
-  }
-
-  .hero-bg { display: none !important; }
-
-  .hero-overlay {
-    position: absolute !important;
-    inset: 0 !important;
-    z-index: 1 !important;
-    background: linear-gradient(
-      to bottom,
-      rgba(5,10,13,0.10) 0%,
-      rgba(5,10,13,0.55) 45%,
-      rgba(5,10,13,0.92) 100%
-    ) !important;
-  }
-
-  .hero-content {
-    position: absolute !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    z-index: 2 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    padding: 0 20px 24px !important;
-  }
-
-  .hero-inner-layout {
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 0 !important;
-    width: 100% !important;
-  }
-
-  .hero-left-col {
-    max-width: 100% !important;
-    width: 100% !important;
-  }
-
-  h1.hero-title {
-    font-size: clamp(1.9rem, 8vw, 2.6rem) !important;
-    margin-bottom: 10px !important;
-    margin-top: 0 !important;
-    line-height: 0.92 !important;
-    display: block !important;
-  }
-
-  .hero-sub {
-    font-size: 0.88rem !important;
-    margin-bottom: 18px !important;
-    max-width: 100% !important;
-    line-height: 1.5 !important;
-    display: block !important;
-  }
-
-  .hero-disciplines { display: none !important; }
-
-  .hero-main-cta {
-    margin-top: 0 !important;
-    padding: 12px 22px !important;
-    font-size: 0.82rem !important;
-    display: inline-block !important;
-  }
-
-  .hero-right-col { display: none !important; }
-}
 </style>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>emailjs.init("_VTsaBcs94E8PUGEH");</script>
