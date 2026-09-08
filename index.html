@@ -82,12 +82,14 @@ header {
 
 @media(max-width: 768px) {
   .hero {
+    position: relative !important;
     min-height: 0 !important;
     height: 480px !important;
     display: block !important;
     background-image: url('imagenes/hero_mobile.png') !important;
     background-size: cover !important;
     background-position: center top !important;
+    overflow: hidden !important;
   }
   .hero-bg { display: none !important; }
   .hero-overlay {
@@ -113,6 +115,8 @@ header {
     align-items: flex-start !important;
     gap: 0 !important;
     width: 100% !important;
+    min-height: 0 !important;
+    padding: 0 !important;
   }
   .hero-left-col { max-width: 100% !important; width: 100% !important; }
   h1.hero-title { font-size: clamp(1.9rem, 8vw, 2.6rem) !important; margin-bottom: 10px !important; margin-top: 0 !important; line-height: 0.92 !important; }
